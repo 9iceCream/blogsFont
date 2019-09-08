@@ -1,7 +1,7 @@
 {
-  "name": "iceCreamFont",
+  "name": "y",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. init",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -31,5 +31,13 @@
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.36.1",
     "webpack-cli": "^3.3.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9iceCream/blogsFont.git"
+  },
+  "bugs": {
+    "url": "https://github.com/9iceCream/blogsFont/issues"
+  },
+  "homepage": "https://github.com/9iceCream/blogsFont#readme"
 }

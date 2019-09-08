@@ -1,0 +1,112 @@
+<template>
+    <div>
+        <div v-for="item in blogs">
+            <el-card :body-style="{ padding: '0px' }">
+                <img src="../images/home-0.jpg" class="image">
+                <div style="padding: 14px;">
+                    <div class="myBlogName">
+                        {{ item.title }}
+                    </div>
+                    <div class="myBlogInfo">
+                        {{ item.info }}
+                    </div>
+                    <div class="myBlogTag">
+                        <el-tag type="info" style="margin-right: 15px" v-for="tag in item.tags">{{ tag }}</el-tag>
+                    </div>
+                    <el-divider></el-divider>
+                    <div class="bottom clearfix">
+                        <time class="time">{{ item.time }}</time>
+                        <el-button type="text" class="button" @click="toBlogPaage(item.id)">阅读</el-button>
+                    </div>
+                </div>
+            </el-card>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "HomeMainBlog",
+        data(){
+            return {
+                blogs: [{
+                    id: 1,
+                    title: '博客标题1',
+                    info: '博客简介1',
+                    content: '博客内容',
+                    images: {
+                        name: 'img-1',
+                        addr: ''
+                    },
+                    tags: ['标签一','标签二'],
+                    time: '2019-09-07T05:55:07.226Z'
+                },{
+                    id: 2,
+                    title: '博客标题2',
+                    info: '博客简介2',
+                    content: '博客内容',
+                    images: {
+                        name: 'img-1',
+                        addr: ''
+                    },
+                    tags: ['标签一','标签二','标签三'],
+                    time: '2019-09-07T05:55:07.226Z'
+                }]
+            }
+        },
+        methods:{
+            toBlogPaage: function(param){
+                this.$router.push("/blogPage/" + param);
+            }
+        },
+        beforeMount() {
+            //加载博主的所有博客数据
+            this.$axios.get('http://localhost:8080/blogs/blogsInfo',{}).then(resp => {
+                console.log(resp)
+                this.blogs = resp;
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    }
+</script>
+
+<style scoped>
+    .time {
+        font-size: 13px;
+        color: #999;
+    }
+    .button {
+        padding: 0;
+        float: right;
+    }
+    .image {
+        width: 100%;
+        display: block;
+    }
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+    .el-card {
+        margin: 70px 10% 50px 5%;
+    }
+    .myBlogName {
+        font-size: xx-large;
+        color: black;
+        margin: 30px 5% 20px 5%;
+    }
+    .myBlogInfo {
+        font-size: x-large;
+        color: #666666;
+        margin: 30px 5% 20px 5%;
+    }
+    .myBlogTag {
+        margin: 50px 5% 50px 5%;
+    }
+</style>

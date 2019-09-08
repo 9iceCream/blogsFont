@@ -1,27 +1,25 @@
 import VueRouter from "vue-router";
 
-import Home from '../page/Home.vue'
-import User from '../page/user/User.vue'
-import Login from '../page/user/Login.vue'
-import Register from "../page/user/Register.vue";
+import BlogsHome from "../page/BlogsHome.vue";
+import HomeMainBlog from "../page/HomeMainBlog.vue";
+import BlogPage from "../page/BlogPage.vue";
 
 var router = new VueRouter({
     routes:[
-        { path:'/',component:Home},
         {
-            path:'/user',
-            component: User,
-            children:[
+            path:'/',
+            component:BlogsHome,
+            redirect:'/homeMain',
+            children: [
                 {
-                    path:'/user/login',
-                    component: Login
-                },
-                {
-                    path:'/user/register',
-                    component: Register
+                    path: '/homeMain',
+                    component: HomeMainBlog
+                },{
+                    path: '/blogPage/:id',
+                    component: BlogPage
                 }
             ]
-        },
+        }
     ]
 })
 module.exports = router
