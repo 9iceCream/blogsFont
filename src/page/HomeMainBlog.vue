@@ -2,7 +2,7 @@
     <div>
         <div v-for="item in blogs">
             <el-card :body-style="{ padding: '0px' }">
-                <img src="../images/home-0.jpg" class="image">
+                <img :src="item.coverImg" class="image">
                 <div style="padding: 14px;">
                     <div class="myBlogName">
                         {{ item.title }}
@@ -11,11 +11,11 @@
                         {{ item.info }}
                     </div>
                     <div class="myBlogTag">
-                        <el-tag type="info" style="margin-right: 15px" v-for="tag in item.tags">{{ tag }}</el-tag>
+                        <el-tag type="info" style="margin-right: 15px" v-for="tag in item.tagArr">{{ tag }}</el-tag>
                     </div>
                     <el-divider></el-divider>
                     <div class="bottom clearfix">
-                        <time class="time">{{ item.time }}</time>
+                        <time class="time">{{ item.timeStr }}</time>
                         <el-button type="text" class="button" @click="toBlogPaage(item.id)">阅读</el-button>
                     </div>
                 </div>
@@ -34,23 +34,25 @@
                     title: '博客标题1',
                     info: '博客简介1',
                     content: '博客内容',
+                    coverImg: 'http://116.62.213.246/blogs/imgs/cover-img-default.jpg',
                     images: {
                         name: 'img-1',
                         addr: ''
                     },
-                    tags: ['标签一','标签二'],
-                    time: '2019-09-07T05:55:07.226Z'
+                    tagArr: ['标签一','标签二'],
+                    timeStr: '2019-09-07T05:55:07.226Z'
                 },{
                     id: 2,
                     title: '博客标题2',
                     info: '博客简介2',
                     content: '博客内容',
+                    coverImg: 'http://116.62.213.246/blogs/imgs/cover-img-default.jpg',
                     images: {
                         name: 'img-1',
                         addr: ''
                     },
-                    tags: ['标签一','标签二','标签三'],
-                    time: '2019-09-07T05:55:07.226Z'
+                    tagArr: ['标签一','标签二','标签三'],
+                    timeStr: '2019-09-07T05:55:07.226Z'
                 }]
             }
         },
@@ -63,7 +65,7 @@
             //加载博主的所有博客数据
             this.$axios.get('http://localhost:8080/blogs/blogsInfo',{}).then(resp => {
                 console.log(resp)
-                this.blogs = resp;
+                this.blogs = resp.data;
             }).catch(err => {
                 console.log(err)
             })

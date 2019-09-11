@@ -51,8 +51,7 @@
         beforeMount() {
             //加载博主数据
             this.$axios.get('http://localhost:8080/blogs/owner',{}).then(resp => {
-                console.log(resp)
-                this.owner = resp;
+                this.owner = resp.data;
             }).catch(err => {
                 console.log(err)
             })
