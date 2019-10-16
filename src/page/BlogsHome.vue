@@ -43,7 +43,7 @@
                     },{
                         id: 'menu3',
                         menuName: 'A B O U T',
-                        menuLink: 'homeAbout'
+                        menuLink: '/homeAbout'
                     }]
                 }
             }
@@ -52,6 +52,7 @@
             //加载博主数据
             this.$axios.get('http://localhost:8080/blogs/owner',{}).then(resp => {
                 this.owner = resp.data;
+                console.log(this.owner)
             }).catch(err => {
                 console.log(err)
             })
